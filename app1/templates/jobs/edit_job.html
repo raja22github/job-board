@@ -1,0 +1,14 @@
+{% extends 'jobs/base.html' %}
+{% block title %}Edit Job{% endblock %}
+{% block content %}
+<div class="container mt-5">
+        <h1 class="text-center mb-4">{% if form.instance.pk %}Edit Job Details{% else %}Create New Job{% endif %}</h1>
+        <div class="employer-form">
+            <form method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn2 me-3 mt-4"><i class="bi bi-check2-circle"></i> Update Job</button>
+                <a href="{% url 'employer_dashboard' %}" class="btn btn1 mt-4"><i class="bi bi-arrow-left me-1"></i> back to dashboard</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
