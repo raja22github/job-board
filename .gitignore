@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+
+# Django database
+db.sqlite3
+*.sqlite3
+
+# Django static/media
+/staticfiles/
+/media/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# Migrations (optional – include only if auto-generated during development)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Log files
+*.log
+
+# Git
+*.swp
+*.swo
