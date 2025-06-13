@@ -1,0 +1,53 @@
+{% extends 'jobs/seeker_base.html' %}
+{% block content %}
+<style>
+    input[type="file"] {
+        display: none;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        color: #333;
+        font-size: 14px;
+        transition: background-color 0.3s ease-in-out;
+    }
+    .custom-file-upload:hover {
+        background-color: #ddd;
+    }
+
+</style>
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Edit Application</h2>
+<div class="employer-form text-center">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label>Upload Resume (PDF only)</label>
+          <div class="my-2">
+            <label>
+                {{ form.resume }}
+                <div class="input-group">
+                    <label class="custom-file-upload">
+                      <i class="bi bi-upload"></i> Upload Resume
+                      <input type="file" name="resume" id="id_resume" accept="application/pdf" hidden onchange="updateFileName(this)">
+                    </label>
+                    <span id="file-name" class="ms-3 mt-2 text-muted">No file chosen</span>
+                  </div>
+            </label>
+            </div>
+          {% if form.resume.errors %}
+            <div class="text-danger mt-2">{{ form.resume.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn2"><i class="bi bi-check2-circle"></i> Update</button>
+            <a href="{% url 'job_seeker_dashboard' %}" class="btn btn-danger"><i class="bi bi-x"></i> Cancel</a>
+        </div>
+      </form>
+</div>
+</div>
+{% endblock %}

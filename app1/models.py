@@ -26,7 +26,7 @@ class Job(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     location = models.CharField(max_length=100)
-    salary = models.CharField(max_length=50, blank=True)
+    salary = models.CharField(max_length=50, blank=True ,default='0')
     job_type = models.CharField(max_length=2, choices=JOB_TYPES)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
@@ -35,3 +35,18 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+
+class JobApplication(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(User, on_delete=models.CASCADE)
+    resume = models.FileField(upload_to='resumes/')
+    applied_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"{self.applicant.username} - {self.job.title} ({self.status})"

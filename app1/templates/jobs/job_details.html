@@ -1,0 +1,45 @@
+{% extends 'jobs/seeker_base.html' %}
+{% block title %} Job List {% endblock %}
+{% block content %}
+<div class="container mt-5">
+        <h1 class="mb-4 text-center">Job Details</h1>
+        <div class="employer-form">
+            {% if job %}
+                        <div class="d-flex justify-content-center align-items-start flex-column gap-2 border border-secondary rounded p-3 shadow mb-4">
+                                <p class="m-0 h4 fw-bold">{{ job.title }}</p>
+                                <p class="m-0 my-2 h5 fw-bold"> Company</p>
+                                <p class="m-0"><i class="bi bi-building"></i> {{ job.company.name }}</p>
+                                <p class="m-0 my-2 h5 fw-bold"> Location</p>
+                                <p class="m-0"><i class="bi bi-geo-alt"></i> {{ job.location }}</p>
+                                <p class="m-0 my-2 h5 fw-bold"> Job Type</p>
+                                <p class="m-0">
+                                    <i class="bi bi-briefcase"></i>
+                                    {% if job.job_type == 'FT' %}
+                                      Full Time
+                                    {% elif job.job_type == 'PT' %}
+                                      Part Time
+                                    {% elif job.job_type == 'CT' %}
+                                      Contract
+                                    {% elif job.job_type == 'FL' %}
+                                      Freelance
+                                    {% else %}
+                                      Unknown
+                                    {% endif %}
+                                  </p>
+                                <p class="m-0 my-2 h5 fw-bold"> Salary</p>
+                                <p class="m-0"><i class="bi bi-cash-stack"></i>{%  if job.salary == '0' %} Negotiable {% else %} {{ job.salary }} {% endif %}</p>
+                                <p class="m-0 my-2 h5 fw-bold"> Job Category</p>
+                                <p class="m-0"><i class="bi bi-tags"></i> {{ job.category.name }}</p>
+                                <p class="m-0 my-2 h5 fw-bold"> Job Description</p>
+                                <p class="m-0"><i class="bi bi-file-earmark-text"></i> {{ job.description }}</p>
+                                <div class="d-flex gap-3 mt-2 justify-content-between">
+                                    <a href="{% url 'apply_to_job' job.pk %}" class="btn btn2 mt-4"><i class="bi bi-arrow-right"></i> Apply Now</a>
+                                    <a href="{% url 'jobs_list' %}" class="btn btn1 mt-4"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+                                </div>
+                        </div>
+            {% else %}
+                <p class="text-center mt-4 fw-bold">No jobs posted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

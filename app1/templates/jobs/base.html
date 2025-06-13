@@ -38,6 +38,12 @@
   {% block content %}{% endblock %}
 
   <!-- ✅ Bootstrap 5 JS CDN -->
+  <script>
+    function updateFileName(input) {
+      const fileName = input.files.length ? input.files[0].name : "No file chosen";
+      document.getElementById('file-name').innerText = fileName;
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,34 @@
+{% extends 'jobs/seeker_base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Apply to {{ job.title }}</h2>
+  <div class="employer-form text-center">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      
+        <div class="mb-4">
+          <label>Upload Resume (PDF only)</label>
+      
+          <div class="input-group mt-4 text-center justify-content-center">
+            <!-- Custom file upload button -->
+            <label class="btn btn1 mb-0">
+              <i class="bi bi-upload"></i> Upload Resume
+              <input type="file" name="resume" id="id_resume" accept="application/pdf" hidden onchange="updateFileName(this)">
+            </label>
+      
+            <!-- Filename display -->
+            <span id="file-name" class="ms-3 mt-2 text-muted">No file chosen</span>
+          </div>
+      
+          {% if form.resume.errors %}
+            <div class="text-danger mt-2">{{ form.resume.errors }}</div>
+          {% endif %}
+        </div>
+      
+        <button type="submit" class="btn btn2">
+          <i class="bi bi-send-fill"></i> Submit Application
+        </button>
+      </form>
+  </div>
+</div>
+{% endblock %}

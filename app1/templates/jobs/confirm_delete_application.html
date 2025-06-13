@@ -1,0 +1,16 @@
+{% extends 'jobs/seeker_base.html' %}
+{% block content %}
+<div class="container mt-4">
+        <h2 class="mb-4 text-center">Delete Application <i class="bi bi-exclamation-triangle-fill text-danger"></i></h2>
+    <div class="employer-form">
+        <h3 class="mb-4 text-center">Are you sure you want to delete your application to {{ application.job.title }}?</h3>
+        <form method="post">
+            {% csrf_token %}
+           <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i> Yes, delete</button>
+            <a href="{% url 'job_seeker_dashboard' %}" class="btn btn-sm btn1"> <i class="bi bi-x"></i> Cancel</a>
+           </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
